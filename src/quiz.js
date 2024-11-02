@@ -25,12 +25,13 @@ class Quiz {
     }
 
     checkAnswer(answer){
-        if(answer){
-            
-        }
-    }
-
+        if (answer) {
+            this.correctAnswers++;
+          }
+ }
     hasEnded(){
         return this.currentQuestionIndex === this.questions.length;
     }
+
+
 }
