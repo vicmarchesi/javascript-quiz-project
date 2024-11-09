@@ -33,5 +33,20 @@ class Quiz {
         return this.currentQuestionIndex === this.questions.length;
     }
 
+    filterQuestionsByDifficulty(difficulty) {
+        if (typeof difficulty !== 'number' || difficulty < 1 || difficulty > 3) {
+            return this.questions;
+          }
+        const newQuestions = this.questions.filter((element) => element.difficulty === difficulty)
+        return this.questions = newQuestions;
+      } 
 
+      averageDifficulty(){
+        
+        const dificultadMedia = this.questions.reduce((accumulator, element) =>{
+            return accumulator += element.difficulty
+        },0)
+        return dificultadMedia/this.questions.length 
+    }
 }
+
