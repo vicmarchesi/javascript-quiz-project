@@ -17,18 +17,20 @@ class Quiz {
         this.currentQuestionIndex += 1;
     }
 
-    shuffleQuestions(){
-        for (let i = this.questions.length - 1; i > 0; i--) { 
-            const j = Math.floor(Math.random() * (i + 1)); 
-            [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]]; 
-    }
-    }
+    shuffleQuestions() {
+        for (let i = this.questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));  // Generate random index
+          [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];  // Swap questions
+        }
+      }
 
-    checkAnswer(answer){
-        if (answer) {
-            this.correctAnswers++;
-          }
+    checkAnswer(answer) { 
+       const currentQuestion = this.questions[this.currentQuestionIndex];
+       if (answer === currentQuestion.answer) {
+        this.correctAnswers++;
+       }
  }
+
     hasEnded(){
         return this.currentQuestionIndex === this.questions.length;
     }
