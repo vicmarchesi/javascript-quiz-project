@@ -61,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let timer;
 
-
   /************  EVENT LISTENERS  ************/
 
   nextButton.addEventListener("click", nextButtonHandler);
@@ -82,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showResults();
       return;
     }
-
+    
     // Clear the previous question text and question choices
     questionContainer.innerText = "";
     choiceContainer.innerHTML = "";
@@ -142,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         choiceContainer.appendChild(label);
         choiceContainer.appendChild(document.createElement('br'));
       })
+      
   }
 
 
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   function showResults() {
-
+    clearInterval(timer);
     // YOUR CODE HERE:
     //
     // 1. Hide the quiz view (div#quizView)
@@ -208,7 +208,25 @@ function restartQuiz() {
   quiz.shuffleQuestions();
 
   showQuestion();
+  clearInterval(timer);
+  startTimer();
 }
 
+function startTimer() {
+  timer = setInterval(() => {
+    quiz.timeRemaining--;
+    const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, '0');
+    const seconds = (quiz.timeRemaining % 60).toString().padStart(2,   
+ '0');
+
+    timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+
+    if (quiz.timeRemaining <= 0) {
+      clearInterval(timer);
+      showResults();
+    }
+  }, 1000);
+}
+startTimer()
 });
 
